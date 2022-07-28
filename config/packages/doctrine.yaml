@@ -1,6 +1,6 @@
 doctrine:
     dbal:
-        url: 'mysql://localhost:3306/symfony_docker'
+        url: '%env(DATABASE_URL)%'
     #server_version: '13'
     orm:
         auto_generate_proxy_classes: true
