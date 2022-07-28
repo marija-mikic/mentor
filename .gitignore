@@ -1,5 +1,3 @@
-.idea
-/.idea
 /mysql
 ###> symfony/framework-bundle ###
 /.env.local
@@ -11,3 +9,5 @@
 /vendor/
 volumes
 ###< symfony/framework-bundle ###
+.idea
+.idea/

@@ -1,6 +1,6 @@
 doctrine:
     dbal:
-        url: 'mysql://database/symfony_docker'
+        url: '%env(DATABASE_URL)%'
     #server_version: '13'
         user: symfony
         password: symfony
