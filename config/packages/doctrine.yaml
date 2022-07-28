@@ -2,8 +2,6 @@ doctrine:
     dbal:
         url: '%env(DATABASE_URL)%'
     #server_version: '13'
-        user: symfony
-        password: symfony
     orm:
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware

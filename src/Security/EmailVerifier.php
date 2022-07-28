@@ -14,7 +14,7 @@ class EmailVerifier
 {
     public function __construct(
         private VerifyEmailHelperInterface $verifyEmailHelper,
-        private MailerInterface $mailer,
+       # private MailerInterface $mailer,
         private EntityManagerInterface $entityManager
     ) {
     }
@@ -34,7 +34,7 @@ class EmailVerifier
 
         $email->context($context);
 
-        $this->mailer->send($email);
+        #$this->mailer->send($email);
     }
 
     /**
