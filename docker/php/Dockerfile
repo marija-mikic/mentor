@@ -8,9 +8,16 @@ RUN apk update && apk upgrade && \
     apk add --no-cache --update --virtual .phpize-deps $PHPIZE_DEPS
 
 RUN pecl channel-update pecl.php.net && \
-    pecl install xdebug && \
+    pecl install xdebug-3.1.5 && \
     docker-php-ext-install mysqli pdo_mysql zip && \
     docker-php-ext-enable xdebug
+
+RUN echo "xdebug.mode=debug"                                               >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
+        echo "xdebug.start_with_request=true"                                            >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
+        echo "xdebug.client_port=9000"                                              >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
+        echo "xdebug.discover_client_host=1"                                         >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
+        echo "xdebug.idekey=PHPSTORM"                                               >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && \
+        echo "xdebug.client_host=host.docker.internal"    >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 RUN addgroup -g 1000 app && \
     adduser -s /bin/sh -DS -u 1000 -G app app

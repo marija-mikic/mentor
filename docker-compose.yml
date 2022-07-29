@@ -34,3 +34,6 @@ services:
       - ./:/app
     depends_on:
       - database
+    expose:
+      - 9000
+      - 9003
