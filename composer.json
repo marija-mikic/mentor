@@ -1,5 +1,7 @@
 {
     "type": "project",
+    "name": "app/test_project",
+    "description": "test project",
     "license": "proprietary",
     "minimum-stability": "stable",
     "prefer-stable": true,
