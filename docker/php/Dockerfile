@@ -22,6 +22,8 @@ RUN echo "xdebug.mode=debug"                                               >> /u
 RUN addgroup -g 1000 app && \
     adduser -s /bin/sh -DS -u 1000 -G app app
 
+RUN docker-php-ext-install pdo pdo_mysql
+
 # Composer
 RUN curl -sS https://getcomposer.org/installer | php && \
     mv composer.phar /usr/local/bin/composer && \
