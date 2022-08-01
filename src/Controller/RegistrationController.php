@@ -2,15 +2,6 @@
 
 declare(strict_types=1);
 
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-
-=======
->>>>>>> e9e3b77 (phpstan)
-=======
->>>>>>> 7287f54 (merging the entire program into one commit)
 namespace App\Controller;
 
 use App\Entity\User;
