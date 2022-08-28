@@ -4,6 +4,31 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    <list default="true" id="8f820f93-b156-4fd5-b58a-e42069d05c46" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/src/Controller/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/LoginController.php" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/templates/login/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main/navbar.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main/navbar.html.twig" afterDir="false" />
+>>>>>>> b2b4eef (add UserController)
+=======
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/LoginController.php" afterDir="false" />
+>>>>>>> bc8f65e (Update workspace.xml)
+=======
+>>>>>>> 2f16ccc (Update workspace.xml)
+=======
+>>>>>>> da07c79 (reset NewRegistration on main)
+    </list>
+=======
+>>>>>>> 82d901c (reset NewRegistration on main)
     <list default="true" id="8f820f93-b156-4fd5-b58a-e42069d05c46" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
