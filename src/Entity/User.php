@@ -75,17 +75,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $city = null;
 
-    #[ORM\Column]
-    private array $roles = [];
-
-    #[ORM\Column]
-    private ?string $password = null;
-
-    #[ORM\Column(type: 'boolean')]
-    private $isVerified = false;
-
-    #[ORM\ManyToOne(inversedBy: 'users')]
-    private ?state $state = null;
+     
+    #[ORM\ManyToOne()]
+    private ?State $state = null;
 
     public function getId(): ?int
     {

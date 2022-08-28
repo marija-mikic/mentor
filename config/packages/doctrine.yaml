@@ -1,5 +1,6 @@
 doctrine:
     dbal:
+<<<<<<< HEAD
         url: '%env(resolve:DATABASE_URL)%'
 
         # IMPORTANT: You MUST configure your server version,
@@ -10,6 +11,9 @@ doctrine:
         user: symfony
         password: symfony
 =======
+>>>>>>> 82d901c (reset NewRegistration on main)
+=======
+        url: '%env(DATABASE_URL)%'
 >>>>>>> 82d901c (reset NewRegistration on main)
     #server_version: '13'
     orm:

@@ -10,6 +10,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/src/Controller/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/LoginController.php" afterDir="false" />
 =======
       <change beforePath="$PROJECT_DIR$/templates/login/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/login/index.html.twig" afterDir="false" />
@@ -21,6 +22,8 @@
 >>>>>>> bc8f65e (Update workspace.xml)
 =======
 >>>>>>> 2f16ccc (Update workspace.xml)
+=======
+>>>>>>> da07c79 (reset NewRegistration on main)
     </list>
 =======
     <list default="true" id="8f820f93-b156-4fd5-b58a-e42069d05c46" name="Changes" comment="" />
