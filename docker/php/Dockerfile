@@ -29,9 +29,8 @@ RUN curl -sS https://getcomposer.org/installer | php && \
     mv composer.phar /usr/local/bin/composer && \
     chmod +x /usr/local/bin/composer
 
-RUN mkdir -m 777 -p ~/app/var && \
-    mkdir -m 777 -p ~/app/vendor && \
-    mkdir -m 777 -p ~/app/var
+RUN mkdir -m777 -p ~/app/var && \
+    mkdir -m777 -p ~/app/vendor
 
 USER app
 WORKDIR /app
