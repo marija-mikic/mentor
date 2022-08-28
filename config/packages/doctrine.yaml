@@ -1,9 +1,6 @@
 doctrine:
     dbal:
-        dbname: symfony_docker
-        host: '%env(DATABASE_HOST)%'
-        user: symfony
-        password: symfony
+        url: '%env(DATABASE_URL)%'
     #server_version: '13'
     orm:
         auto_generate_proxy_classes: true

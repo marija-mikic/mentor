@@ -1,7 +1,5 @@
 {
     "type": "project",
-    "name": "app/test_project",
-    "description": "test project",
     "license": "proprietary",
     "minimum-stability": "stable",
     "prefer-stable": true,
@@ -91,8 +89,6 @@
     },
     "require-dev": {
         "symfony/stopwatch": "5.4.*",
-        "symfony/web-profiler-bundle": "5.4.*",
-        "phpstan/phpstan": "^1.8"
-
+        "symfony/web-profiler-bundle": "5.4.*"
     }
 }
