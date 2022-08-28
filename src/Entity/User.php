@@ -151,7 +151,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see UserInterface
      */
+<<<<<<< HEAD
     public function eraseCredentials():void
+=======
+    public function getSalt(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+>>>>>>> 82d901c (reset NewRegistration on main)
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
