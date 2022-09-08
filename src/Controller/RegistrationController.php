@@ -16,7 +16,26 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class RegistrationController extends AbstractController
 {
+<<<<<<< HEAD
     #[Route('/register', name: 'app_register')]
+=======
+    private EmailVerifier $emailVerifier;
+
+    public function __construct(EmailVerifier $emailVerifier)
+    {
+        $this->emailVerifier = $emailVerifier;
+    }
+
+    #[Route('/register', name: 'app_register')]    
+    /**
+     * register
+     *
+     * @param  mixed $request
+     * @param  mixed $userPasswordHasher
+     * @param  mixed $entityManager
+     * @return Response
+     */
+>>>>>>> b2bdceb (extensions PHPdoc)
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
