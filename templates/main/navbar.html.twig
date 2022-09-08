@@ -12,10 +12,10 @@
     <a class="navbar-brand" href="/"> Naslovna </a>
     <div class="collapse navbar-collapse" id="navbarToggler">
             <li>
-                 <a class="nav-link" href="login/index"> Login </a>
+                 <a class="nav-link" href="{{ path('app_login') }}"> Login </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="r/register"> Register </a>
+                <a class="nav-link" href="{{ path('app_register') }}"> Register </a>
             </li>
             <?php endif; ?>
             <div class="ms-5"></div>
