@@ -23,11 +23,27 @@
                     }) }}
                     {{ form_row(registrationForm.agreeTerms) }}
 
+<<<<<<< HEAD
                     <button type="submit" class="btn">Register</button>
                 {{ form_end(registrationForm) }}
 
             </div>
         </div>
     </div>
+=======
+    {{ form_start(registrationForm) }}
+        {{ form_row(registrationForm.name) }}
+        {{ form_row(registrationForm.surname) }}
+        {{ form_row(registrationForm.adress) }}
+        {{ form_row(registrationForm.house_number) }}
+        {{ form_row(registrationForm.post_number) }}
+        {{ form_row(registrationForm.city) }}
+        {{ form_row(registrationForm.state) }}
+        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.plainPassword, {
+            label: 'Password'
+        }) }}
+        {{ form_row(registrationForm.agreeTerms) }}
+>>>>>>> 54b40ac (add form for registration)
 
 {% endblock %}
