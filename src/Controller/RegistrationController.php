@@ -24,7 +24,15 @@ class RegistrationController extends AbstractController
         $this->emailVerifier = $emailVerifier;
     }
 
-    #[Route('/register', name: 'app_register')]
+    #[Route('/register', name: 'app_register')]    
+    /**
+     * register
+     *
+     * @param  mixed $request
+     * @param  mixed $userPasswordHasher
+     * @param  mixed $entityManager
+     * @return Response
+     */
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
