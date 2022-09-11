@@ -171,7 +171,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-<<<<<<< HEAD
     public function getSurname(): ?string
     {
         return $this-> surname;
@@ -256,7 +255,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-=======
     public function getState(): ?state
     {
         return $this->state;
@@ -268,5 +266,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
->>>>>>> a066193 (make relations with State table)
+
 }
