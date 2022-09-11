@@ -75,6 +75,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToOne(inversedBy: 'users')]
     private ?state $state = null;
 
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    private ?state $state = null;
+
        public function getId(): ?int
     {
         return $this->id;
