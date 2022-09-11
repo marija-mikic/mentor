@@ -79,6 +79,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToOne()]
     private ?State $state = null;
 
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -246,6 +247,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setHouseNumber(int $house_number): self
     {
         $this->house_number = $house_number;
+
+        return $this;
+    }
+
+    public function getState(): ?state
+    {
+        return $this->state;
+    }
+
+    public function setState(?state $state): self
+    {
+        $this->state = $state;
 
         return $this;
     }
