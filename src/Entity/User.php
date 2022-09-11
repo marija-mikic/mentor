@@ -18,7 +18,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 180, unique: true)]
+    private $name;
+    private $surname;
+    private $adress;
+    private $house_number;
+    private $post_number;
+    private $city;
+    
+  	#[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -27,7 +34,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private array $roles = [];
 
-    /**
+       /**
      * @var string The hashed password
      */
     #[ORM\Column]
@@ -84,7 +91,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToOne(inversedBy: 'users')]
     private ?state $state = null;
 
-    public function getId(): ?int
+       public function getId(): ?int
     {
         return $this->id;
     }
