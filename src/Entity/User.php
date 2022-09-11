@@ -81,6 +81,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $house_number = null;
 
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    private ?state $state = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -168,6 +171,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+<<<<<<< HEAD
     public function getSurname(): ?string
     {
         return $this-> surname;
@@ -252,4 +256,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+=======
+    public function getState(): ?state
+    {
+        return $this->state;
+    }
+
+    public function setState(?state $state): self
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+>>>>>>> a066193 (make relations with State table)
 }
