@@ -4,6 +4,7 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="8f820f93-b156-4fd5-b58a-e42069d05c46" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
 <<<<<<< HEAD
@@ -27,6 +28,9 @@
 >>>>>>> 2f16ccc (Update workspace.xml)
 >>>>>>> 33af318 (Update workspace.xml)
     </list>
+=======
+    <list default="true" id="8f820f93-b156-4fd5-b58a-e42069d05c46" name="Changes" comment="" />
+>>>>>>> 7226cd7 (try resolve conflict)
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -325,6 +329,7 @@
       <workItem from="1658561408002" duration="13396000" />
       <workItem from="1658580615157" duration="7278000" />
       <workItem from="1659278175619" duration="11295000" />
+      <workItem from="1662886200266" duration="12000" />
     </task>
     <servers />
   </component>
