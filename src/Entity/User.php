@@ -85,6 +85,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $house_number = null;
 
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    private ?state $state = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -152,9 +155,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see UserInterface
      */
-<<<<<<< HEAD
-    public function eraseCredentials():void
-=======
     public function getSalt(): ?string
     {
         return null;
@@ -164,7 +164,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @see UserInterface
      */
     public function eraseCredentials()
->>>>>>> 82d901c (reset NewRegistration on main)
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
