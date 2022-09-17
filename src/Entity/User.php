@@ -17,15 +17,46 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-
+    
+    #[Assert\Length(
+        min: 1,
+        max: 5,
+        minMessage: 'Your first name must be at least {{ limit }} characters long',
+        maxMessage: 'Your first name cannot be longer than {{ limit }} characters',
+    )]
+    #[Assert\Type('string')]
     private $name;
-    private $surname;
+
+     
+    #[Assert\NotBlank] 
     private $adress;
+
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 5)]
     private $house_number;
+
+    #[Assert\Type('integer')]
+    #[Assert\Length(
+        min: 1,
+        max: 5,
+        minMessage: 'Post number must be at least {{ limit }} characters long',
+        maxMessage: 'Post number cannot be longer than {{ limit }} characters',
+    )]
     private $post_number;
+
+    #[Assert\Type('string')]
+    #[Assert\Length(
+        min: 2,     
+        minMessage: 'City must be at least {{ limit }} characters long',
+        
+    )]
     private $city;
     
   	#[ORM\Column(length: 180, unique: true)]
+    #[Assert\Email(
+        message: 'The email {{ value }} is not a valid email.',
+    )]
+    #[Assert\Type(Address::class)]
     private ?string $email = null;
 
     #[ORM\Column]
