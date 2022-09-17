@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -17,15 +18,46 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\GeneratedValue]
     #[ORM\Column()]
     private ?int $id = null;
-
+    
+    #[Assert\Length(
+        min: 1,
+        max: 5,
+        minMessage: 'Your first name must be at least {{ limit }} characters long',
+        maxMessage: 'Your first name cannot be longer than {{ limit }} characters',
+    )]
+    #[Assert\Type('string')]
     private $name;
-    private $surname;
+
+     
+    #[Assert\NotBlank] 
     private $adress;
+
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 5)]
     private $house_number;
+
+    #[Assert\Type('integer')]
+    #[Assert\Length(
+        min: 1,
+        max: 5,
+        minMessage: 'Post number must be at least {{ limit }} characters long',
+        maxMessage: 'Post number cannot be longer than {{ limit }} characters',
+    )]
     private $post_number;
+
+    #[Assert\Type('string')]
+    #[Assert\Length(
+        min: 2,     
+        minMessage: 'City must be at least {{ limit }} characters long',
+        
+    )]
     private $city;
     
   	#[ORM\Column(length: 180, unique: true)]
+    #[Assert\Email(
+        message: 'The email {{ value }} is not a valid email.',
+    )]
+    #[Assert\Type(Address::class)]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -156,9 +188,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * Get the value of name
-     */ 
+    
     public function getName()
     {
         return $this->name;
