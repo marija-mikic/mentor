@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\StateRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: StateRepository::class)]
@@ -12,19 +10,11 @@ class State
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column()]
+    #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column]
     private ?string $name = null;
-
-    #[ORM\OneToMany(mappedBy: 'state', targetEntity: User::class)]
-    private Collection $users;
-
-    public function __construct()
-    {
-        $this->users = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -42,34 +32,8 @@ class State
 
         return $this;
     }
-
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUsers(): Collection
+    public function __toString()
     {
-        return $this->users;
-    }
-
-    public function addUser(User $user): self
-    {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-            $user->setState($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(User $user): self
-    {
-        if ($this->users->removeElement($user)) {
-            // set the owning side to null (unless already changed)
-            if ($user->getState() === $this) {
-                $user->setState(null);
-            }
-        }
-
-        return $this;
+        return $this->getName();
     }
 }

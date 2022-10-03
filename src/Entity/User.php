@@ -32,7 +32,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private array $roles = [];
 
-       /**
+    /**
      * @var string The hashed password
      */
     #[ORM\Column]
@@ -113,7 +113,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return (string) $this->email;
     }
 
-     /**
+    /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
+    {
+        return null;
+    }
+
+    /**
      * @see UserInterface
      */
     public function getRoles(): array
@@ -150,15 +161,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see UserInterface
      */
-    public function getSalt(): ?string
-    {
-        return null;
-    }
-
-    /**
-     * @see UserInterface
-     */
-    public function eraseCredentials()
+    public function eraseCredentials():void
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
