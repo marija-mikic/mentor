@@ -3,19 +3,20 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
- 
+
 #[ORM\Entity(repositoryClass: UserRepository::class)]
- 
+#[ORM\Table(name: '`user`')]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column()]
     private ?int $id = null;
       
   	#[ORM\Column(length: 180, unique: true)]
@@ -26,25 +27,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $email = null;
 
     #[ORM\Column]
-     /**
-     * @var array<string> $roles
-     */
     private array $roles = [];
 
-    /**
+       /**
      * @var string The hashed password
      */
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\Column(type: Types::TEXT)]
-    #[Assert\Length(
-        min: 5,
-        max: 30,
-        minMessage: 'Your first name must be at least {{ limit }} characters long',
-        maxMessage: 'Your first name cannot be longer than {{ limit }} characters',
-    )]
-    private ?string $name = null;
+    #[ORM\Column(type: 'boolean')]
+    private $isVerified = false;
 
     #[ORM\Column(type: Types::class)]
     #[Assert\Length(
@@ -112,9 +104,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return (string) $this->email;
     }
 
-    public function getSalt(): ?string
+    /**
+     * @deprecated since Symfony 5.3, use getUserIdentifier instead
+     */
+    public function getUsername(): string
     {
-        return null;
+        return (string) $this->email;
     }
 
     
@@ -150,6 +145,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
+     * @see UserInterface
+     */
+    public function getSalt(): ?string
+    {
+        return null;
+    }
+
+     /**
      * @see UserInterface
      */
     public function eraseCredentials()
@@ -188,43 +194,52 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->name;
     }
 
-    public function setName(string $name): self
+    /**
+     * Set the value of name
+     *
+     * @return  self
+     */ 
+    public function setName($name)
     {
         $this->name = $name;
 
         return $this;
     }
 
-    public function getSurname(): ?string
+    /**
+     * Get the value of surname
+     */ 
+    public function getSurname()
     {
-        return $this-> surname;
+        return $this->surname;
     }
 
-    public function setSurname(string $surname): self
+    /**
+     * Set the value of surname
+     *
+     * @return  self
+     */ 
+    public function setSurname($surname)
     {
-        $this-> surname = $surname;
+        $this->surname = $surname;
 
         return $this;
     }
 
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    public function getAdress(): ?string
+    /**
+     * Get the value of adress
+     */ 
+    public function getAdress()
     {
         return $this->adress;
     }
 
-    public function setAdress(string $adress): self
+    /**
+     * Set the value of adress
+     *
+     * @return  self
+     */ 
+    public function setAdress($adress)
     {
         $this->adress = $adress;
 
@@ -269,4 +284,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->getName();
     }
 
+    /**
+     * Get the value of post_number
+     */ 
+    public function getPost_number()
+    {
+        return $this->post_number;
+    }
+
+    /**
+     * Set the value of post_number
+     *
+     * @return  self
+     */ 
+    public function setPost_number($post_number)
+    {
+        $this->post_number = $post_number;
+
+        return $this;
+    }
+
+    
+    public function isIsVerified(): ?bool
+    {
+        return $this->isVerified;
+    }
 }
