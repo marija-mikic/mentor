@@ -1,20 +1,9 @@
 doctrine:
     dbal:
-<<<<<<< HEAD
-        url: '%env(resolve:DATABASE_URL)%'
-
-        # IMPORTANT: You MUST configure your server version,
-        # either here or in the DATABASE_URL env var (see .env file)
-    <<<<<<< HEAD
         dbname: symfony_docker
         host: '%env(DATABASE_HOST)%'
         user: symfony
         password: symfony
-=======
->>>>>>> 82d901c (reset NewRegistration on main)
-=======
-        url: '%env(DATABASE_URL)%'
->>>>>>> 82d901c (reset NewRegistration on main)
     #server_version: '13'
     orm:
         auto_generate_proxy_classes: true
@@ -36,7 +25,7 @@ when@test:
 when@prod:
     doctrine:
         orm:
-            auto_generate_proxy_classes: true
+            auto_generate_proxy_classes: false
             query_cache_driver:
                 type: pool
                 pool: doctrine.system_cache_pool

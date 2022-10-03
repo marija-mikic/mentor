@@ -8,11 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-<<<<<<< HEAD
  
-=======
-
->>>>>>> 0f7e6e8 (setting up validation)
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -21,43 +17,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-<<<<<<< HEAD
-=======
-    
-    #[Assert\Length(
-        min: 1,
-        max: 5,
-        minMessage: 'Your first name must be at least {{ limit }} characters long',
-        maxMessage: 'Your first name cannot be longer than {{ limit }} characters',
-    )]
-    #[Assert\Type('string')]
-    private $name;
-
-     
-    #[Assert\NotBlank] 
-    private $adress;
-
-    #[Assert\NotBlank]
-    #[Assert\Length(max: 5)]
-    private $house_number;
-
-    #[Assert\Type('integer')]
-    #[Assert\Length(
-        min: 1,
-        max: 5,
-        minMessage: 'Post number must be at least {{ limit }} characters long',
-        maxMessage: 'Post number cannot be longer than {{ limit }} characters',
-    )]
-    private $post_number;
-
-    #[Assert\Type('string')]
-    #[Assert\Length(
-        min: 2,     
-        minMessage: 'City must be at least {{ limit }} characters long',
-        
-    )]
-    private $city;
->>>>>>> 0f7e6e8 (setting up validation)
     
   	#[ORM\Column(length: 180, unique: true)]
     #[Assert\Email(
@@ -308,129 +267,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-<<<<<<< HEAD
-=======
-    
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set the value of name
-     *
-     * @return  self
-     */ 
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of surname
-     */ 
-    public function getSurname()
-    {
-        return $this->surname;
-    }
-
-    /**
-     * Set the value of surname
-     *
-     * @return  self
-     */ 
-    public function setSurname($surname)
-    {
-        $this->surname = $surname;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of adress
-     */ 
-    public function getAdress()
-    {
-        return $this->adress;
-    }
-
-    /**
-     * Set the value of adress
-     *
-     * @return  self
-     */ 
-    public function setAdress($adress)
-    {
-        $this->adress = $adress;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of house_number
-     */ 
-    public function getHouse_number()
-    {
-        return $this->house_number;
-    }
-
-    /**
-     * Set the value of house_number
-     *
-     * @return  self
-     */ 
-    public function setHouse_number($house_number)
-    {
-        $this->house_number = $house_number;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of post_number
-     */ 
-    public function getPost_number()
-    {
-        return $this->post_number;
-    }
-
-    /**
-     * Set the value of post_number
-     *
-     * @return  self
-     */ 
-    public function setPost_number($post_number)
-    {
-        $this->post_number = $post_number;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of city
-     */ 
-    public function getCity()
-    {
-        return $this->city;
-    }
-
-    /**
-     * Set the value of city
-     *
-     * @return  self
-     */ 
-    public function setCity($city)
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
-    public function isIsVerified(): ?bool
-    {
-        return $this->isVerified;
-    }
->>>>>>> 0f7e6e8 (setting up validation)
 }

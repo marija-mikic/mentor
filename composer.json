@@ -4,7 +4,7 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
-        "php": ">=8.0",
+        "php": ">=8.0.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/annotations": "^1.13",
@@ -12,13 +12,8 @@
         "doctrine/doctrine-bundle": "^2.7",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/migrations": "^3.5",
-<<<<<<< HEAD
         "doctrine/orm": "^2.12",
         "sensio/framework-extra-bundle": "^6.2",
-=======
-        "doctrine/orm": "^2.13",
-        "symfony/cache": "5.4.*",
->>>>>>> e5ef3b4 (change version doctrine/orm  and migrations-bundle)
         "symfony/console": "5.4.*",
         "symfony/debug-bundle": "5.4.*",
         "symfony/dotenv": "5.4.*",
@@ -68,7 +63,10 @@
     "replace": {
         "symfony/polyfill-ctype": "*",
         "symfony/polyfill-iconv": "*",
-        "symfony/polyfill-php72": "*"
+        "symfony/polyfill-php72": "*",
+        "symfony/polyfill-php73": "*",
+        "symfony/polyfill-php74": "*",
+        "symfony/polyfill-php80": "*"
     },
     "scripts": {
         "auto-scripts": {

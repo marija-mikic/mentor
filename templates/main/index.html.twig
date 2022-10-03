@@ -4,15 +4,14 @@
 <li><a class="navbar-brand" href="/"> Naslovna </a></li>
 <li><a class="nav-link text-black-50" <a href="{{ path('app_login') }}">Login </a></li>
 <li><a class="nav-link text-black-50" <a href="{{ path('app_register') }}">Register </a></li>
+{% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.email }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
 
-
-<<<<<<< HEAD
-{% block title %}Dobar dan ,dobro došli na Marijin web shop!{% endblock %}
-
-=======
 </head>
         
->>>>>>> e9e3b77 (phpstan)
 {% block body %}
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
