@@ -18,58 +18,31 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\GeneratedValue]
     #[ORM\Column()]
     private ?int $id = null;
-
-    #[ORM\Column(length: 180, unique: true)]
-    private ?string $email = null;
-
-    #[ORM\Column]
-     /**
-     * @var array<string> $roles
-     */
-    private array $roles = [];
-
-    /**
-     * @var string The hashed password
-     */
-    #[ORM\Column]
-    private ?string $password = null;
-
-    #[ORM\Column(type: Types::TEXT)]
+    
     #[Assert\Length(
-        min: 5,
-        max: 30,
+        min: 1,
+        max: 5,
         minMessage: 'Your first name must be at least {{ limit }} characters long',
         maxMessage: 'Your first name cannot be longer than {{ limit }} characters',
     )]
-    private ?string $name = null;
+    #[Assert\Type('string')]
+    private $name;
 
-    #[ORM\Column(type: Types::TEXT)]
-    #[Assert\Length(
-        min: 5,
-        max: 30,
-        minMessage: 'Your first name must be at least {{ limit }} characters long',
-        maxMessage: 'Your first name cannot be longer than {{ limit }} characters',
-        )]
-    private ?string $lastname = null;
+     
+    #[Assert\NotBlank] 
+    private $adress;
 
-    #[ORM\Column]
-    #[Assert\Regex(
-        pattern: '/^[a-z]+$/i',
-        htmlPattern: '^[a-zA-Z]+$',
-        message: 'This {{ value }} is not valid.'
-    )]
-    private ?string $username = null;
-
-    #[ORM\Column(length: 255)]
-    #[Assert\Valid]
-    private ?string $adress = null;
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 5)]
+    private $house_number;
 
     #[ORM\Column(type: Types::STRING)]
     #[Assert\Count(
         max: 5,
-        maxMessage: 'Ymax {{ limit }}',
+        minMessage: 'Post number must be at least {{ limit }} characters long',
+        maxMessage: 'Post number cannot be longer than {{ limit }} characters',
     )]
-    private ?int $postcode = null;
+    private $post_number;
 
 
     #[Assert\NotBlank]
@@ -88,7 +61,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToOne(inversedBy: 'users')]
     private ?state $state = null;
 
-    public function getId(): ?int
+       public function getId(): ?int
     {
         return $this->id;
     }
