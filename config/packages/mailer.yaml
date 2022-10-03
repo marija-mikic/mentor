@@ -1,0 +1,4 @@
+framework:
+    mailer:
+        enabled: false
+        dsn: 'localhost'
