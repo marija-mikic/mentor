@@ -3,85 +3,79 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
- 
+
 #[ORM\Entity(repositoryClass: UserRepository::class)]
- 
+#[ORM\Table(name: '`user`')]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column()]
     private ?int $id = null;
+    
+    #[Assert\Length(
+        min: 1,
+        max: 5,
+        minMessage: 'Your first name must be at least {{ limit }} characters long',
+        maxMessage: 'Your first name cannot be longer than {{ limit }} characters',
+    )]
+    #[Assert\Type('string')]
+    private $name;
 
-    #[ORM\Column(length: 180, unique: true)]
+     
+    #[Assert\NotBlank] 
+    private $adress;
+
+    #[Assert\NotBlank]
+    #[Assert\Length(max: 5)]
+    private $house_number;
+
+    #[Assert\Type('integer')]
+    #[Assert\Length(
+        min: 1,
+        max: 5,
+        minMessage: 'Post number must be at least {{ limit }} characters long',
+        maxMessage: 'Post number cannot be longer than {{ limit }} characters',
+    )]
+    private $post_number;
+
+    #[Assert\Type('string')]
+    #[Assert\Length(
+        min: 2,     
+        minMessage: 'City must be at least {{ limit }} characters long',
+        
+    )]
+    private $city;
+    
+  	#[ORM\Column(length: 180, unique: true)]
+    #[Assert\Email(
+        message: 'The email {{ value }} is not a valid email.',
+    )]
+    #[Assert\Type(Address::class)]
     private ?string $email = null;
 
     #[ORM\Column]
-     /**
-     * @var array<string> $roles
-     */
     private array $roles = [];
 
-    /**
+       /**
      * @var string The hashed password
      */
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\Column(type: Types::TEXT)]
-    #[Assert\Length(
-        min: 5,
-        max: 30,
-        minMessage: 'Your first name must be at least {{ limit }} characters long',
-        maxMessage: 'Your first name cannot be longer than {{ limit }} characters',
-    )]
-    private ?string $name = null;
+    #[ORM\Column(type: 'boolean')]
+    private $isVerified = false;
 
-    #[ORM\Column(type: Types::TEXT)]
-    #[Assert\Length(
-        min: 5,
-        max: 30,
-        minMessage: 'Your first name must be at least {{ limit }} characters long',
-        maxMessage: 'Your first name cannot be longer than {{ limit }} characters',
-        )]
-    private ?string $lastname = null;
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    private ?state $state = null;
 
-    #[ORM\Column]
-    #[Assert\Regex(
-        pattern: '/^[a-z]+$/i',
-        htmlPattern: '^[a-zA-Z]+$',
-        message: 'This {{ value }} is not valid.'
-    )]
-    private ?string $username = null;
-
-    #[ORM\Column(length: 255)]
-    #[Assert\Valid]
-    private ?string $adress = null;
-
-    #[ORM\Column(type: Types::INTEGER)]
-    #[Assert\Count(
-        max: 5,
-        maxMessage: 'Ymax {{ limit }}',
-    )]
-    private ?int $postcode = null;
-
-
-    #[Assert\NotBlank]
-    #[ORM\Column(length: 255)]
-    private ?string $city = null;
-
-    #[ORM\ManyToOne]
-    private ?State $state = null;
-
-    #[ORM\Column]
-    private ?int $house_number = null;
-
-    public function getId(): ?int
+       public function getId(): ?int
     {
         return $this->id;
     }
@@ -109,14 +103,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * Returning a salt is only needed, if you are not using a modern
-     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
-     *
-     * @see UserInterface
+     * @deprecated since Symfony 5.3, use getUserIdentifier instead
      */
-    public function getSalt(): ?string
+    public function getUsername(): string
     {
-        return null;
+        return (string) $this->email;
     }
 
     /**
@@ -154,82 +145,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
+     * Returning a salt is only needed, if you are not using a modern
+     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
+     *
      * @see UserInterface
      */
-    public function eraseCredentials():void
+    public function getSalt(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
 
-    public function getName(): ?string
+    public function isVerified(): bool
     {
-        return $this->name;
+        return $this->isVerified;
     }
 
-    public function setName(string $name): self
+    public function setIsVerified(bool $isVerified): self
     {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getLastname(): ?string
-    {
-        return $this->lastname;
-    }
-
-    public function setLastname(string $lastname): self
-    {
-        $this->lastname = $lastname;
-
-        return $this;
-    }
-
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    public function getAdress(): ?string
-    {
-        return $this->adress;
-    }
-
-    public function setAdress(string $adress): self
-    {
-        $this->adress = $adress;
-
-        return $this;
-    }
-
-    public function getPostcode(): ?int
-    {
-        return $this->postcode;
-    }
-
-    public function setPostcode(int $postcode): self
-    {
-        $this->postcode = $postcode;
-
-        return $this;
-    }
-
-    public function getCity(): ?string
-    {
-        return $this->city;
-    }
-
-    public function setCity(string $city): self
-    {
-        $this->city = $city;
+        $this->isVerified = $isVerified;
 
         return $this;
     }
@@ -246,16 +188,126 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getHouseNumber(): ?int
+    
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set the value of name
+     *
+     * @return  self
+     */ 
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of surname
+     */ 
+    public function getSurname()
+    {
+        return $this->surname;
+    }
+
+    /**
+     * Set the value of surname
+     *
+     * @return  self
+     */ 
+    public function setSurname($surname)
+    {
+        $this->surname = $surname;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of adress
+     */ 
+    public function getAdress()
+    {
+        return $this->adress;
+    }
+
+    /**
+     * Set the value of adress
+     *
+     * @return  self
+     */ 
+    public function setAdress($adress)
+    {
+        $this->adress = $adress;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of house_number
+     */ 
+    public function getHouse_number()
     {
         return $this->house_number;
     }
 
-    public function setHouseNumber(int $house_number): self
+    /**
+     * Set the value of house_number
+     *
+     * @return  self
+     */ 
+    public function setHouse_number($house_number)
     {
         $this->house_number = $house_number;
 
         return $this;
     }
 
+    /**
+     * Get the value of post_number
+     */ 
+    public function getPost_number()
+    {
+        return $this->post_number;
+    }
+
+    /**
+     * Set the value of post_number
+     *
+     * @return  self
+     */ 
+    public function setPost_number($post_number)
+    {
+        $this->post_number = $post_number;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of city
+     */ 
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * Set the value of city
+     *
+     * @return  self
+     */ 
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function isIsVerified(): ?bool
+    {
+        return $this->isVerified;
+    }
 }
