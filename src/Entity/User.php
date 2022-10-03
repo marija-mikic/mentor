@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
  
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ORM\Table(name: '`user`')]
+ 
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -31,7 +31,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private array $roles = [];
 
-       /**
+    /**
      * @var string The hashed password
      */
     #[ORM\Column]
@@ -53,7 +53,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         minMessage: 'Your first name must be at least {{ limit }} characters long',
         maxMessage: 'Your first name cannot be longer than {{ limit }} characters',
         )]
-    private ?string $surname = null;
+    private ?string $lastname = null;
 
     #[ORM\Column]
     #[Assert\Regex(
@@ -72,7 +72,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         max: 5,
         maxMessage: 'Ymax {{ limit }}',
     )]
-    private ?string $postcode = null;
+    private ?int $postcode = null;
 
 
     #[Assert\NotBlank]
@@ -80,15 +80,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $city = null;
 
     #[ORM\ManyToOne]
-    private ?Country $country = null;
+    private ?State $state = null;
 
     #[ORM\Column]
     private ?int $house_number = null;
 
-    #[ORM\ManyToOne()]
-    private ?state $state = null;
-
-       public function getId(): ?int
+    public function getId(): ?int
     {
         return $this->id;
     }
