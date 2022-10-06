@@ -8,15 +8,14 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-
-#[ORM\Entity(repositoryClass: UserRepository::class)]
+ 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column()]
+    #[ORM\Column]
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
@@ -36,13 +35,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\Length(
-        min: 1,
-        max: 5,
+        min: 5,
+        max: 30,
         minMessage: 'Your first name must be at least {{ limit }} characters long',
         maxMessage: 'Your first name cannot be longer than {{ limit }} characters',
     )]
-    #[Assert\Type('string')]
-    private $name;
+    private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\Length(
@@ -51,7 +49,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         minMessage: 'Your first name must be at least {{ limit }} characters long',
         maxMessage: 'Your first name cannot be longer than {{ limit }} characters',
         )]
-    private ?string $lastname = null;
+    private ?string $surname = null;
 
     #[ORM\Column]
     #[Assert\Regex(
@@ -61,12 +59,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     )]
     private ?string $username = null;
 
-    
-    #[ORM\Column(type: Types::STRING)]
+    #[ORM\Column(length: 255)]
+    #[Assert\Valid]
+    private ?string $adress = null;
+
+    #[ORM\Column(type: Types::INTEGER)]
     #[Assert\Count(
         max: 5,
-        minMessage: 'Post number must be at least {{ limit }} characters long',
-        maxMessage: 'Post number cannot be longer than {{ limit }} characters',
+        maxMessage: 'Ymax {{ limit }}',
     )]
     private ?int $postcode = null;
 
@@ -75,11 +75,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $city = null;
 
-     
-    #[ORM\ManyToOne()]
-    private ?State $state = null;
+    #[ORM\ManyToOne]
+    private ?Country $country = null;
 
-    
+    #[ORM\Column]
+    private ?int $house_number = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -107,15 +108,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return (string) $this->email;
     }
 
-    /**
-     * Returning a salt is only needed, if you are not using a modern
-     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
-     *
-     * @see UserInterface
-     */
     public function getSalt(): ?string
     {
-        return (string) $this->email;
+        return null;
     }
 
     /**
@@ -152,167 +147,109 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-     /**
+    /**
      * @see UserInterface
      */
-    public function eraseCredentials()
+    public function eraseCredentials():void
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
 
-    public function isVerified(): bool
-    {
-        return $this->isVerified;
-    }
-
-    public function setIsVerified(bool $isVerified): self
-    {
-        $this->isVerified = $isVerified;
-
-        return $this;
-    }
-
-    public function getLastname(): ?string
-    {
-        return $this->lastname;
-    }
-
-    public function setLastname(string $lastname): self
-    {
-        $this->lastname = $lastname;
-
-        return $this;
-    }
-
-    
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * Set the value of name
-     *
-     * @return  self
-     */ 
-    public function setName($name)
+    public function setName(string $name): self
     {
         $this->name = $name;
 
         return $this;
     }
 
-    /**
-     * Get the value of surname
-     */ 
-    public function getSurname()
+    public function getSurname(): ?string
     {
-        return $this->surname;
+        return $this-> surname;
     }
 
-    /**
-     * Set the value of surname
-     *
-     * @return  self
-     */ 
-    public function setSurname($surname)
+    public function setSurname(string $surname): self
     {
-        $this->surname = $surname;
+        $this-> surname = $surname;
 
         return $this;
     }
 
-    /**
-     * Get the value of adress
-     */ 
-    public function getAdress()
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    public function getAdress(): ?string
     {
         return $this->adress;
     }
 
-    /**
-     * Set the value of adress
-     *
-     * @return  self
-     */ 
-    public function setAdress($adress)
+    public function setAdress(string $adress): self
     {
         $this->adress = $adress;
 
         return $this;
     }
 
-    /**
-     * Get the value of house_number
-     */ 
-    public function getHouse_number()
+    public function getPostcode(): ?int
     {
-        return $this->house_number;
+        return $this->postcode;
     }
 
-    /**
-     * Set the value of house_number
-     *
-     * @return  self
-     */ 
-    public function setHouse_number($house_number)
+    public function setPostcode(int $postcode): self
     {
-        $this->house_number = $house_number;
+        $this->postcode = $postcode;
 
         return $this;
     }
 
-    public function getState(): ?state
-    {
-        return $this->state;
-    }
-
-    public function setState(?state $state): self
-    {
-        $this->state = $state;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of city
-     */ 
-    public function getCity()
+    public function getCity(): ?string
     {
         return $this->city;
     }
 
-    /**
-     * Set the value of city
-     *
-     * @return  self
-     */ 
-    public function setCity($city)
+    public function setCity(string $city): self
     {
         $this->city = $city;
 
         return $this;
     }
 
-
-    /**
-     * Get the value of username
-     */ 
-    public function getUsername()
+    public function getCountry(): ?country
     {
-        return $this->username;
+        return $this->country;
     }
 
-    /**
-     * Set the value of username
-     *
-     * @return  self
-     */ 
-    public function setUsername($username)
+    public function setCountry(?country $country): self
     {
-        $this->username = $username;
+        $this->country = $country;
 
         return $this;
     }
+
+    public function getHouseNumber(): ?int
+    {
+        return $this->house_number;
+    }
+
+    public function setHouseNumber(int $house_number): self
+    {
+        $this->house_number = $house_number;
+
+        return $this;
+    }
+
 }
