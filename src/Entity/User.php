@@ -68,7 +68,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         max: 5,
         maxMessage: 'Ymax {{ limit }}',
     )]
-    private ?int $postcode = null;
+    private ?string $postcode = null;
 
 
     #[Assert\NotBlank]
