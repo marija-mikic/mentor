@@ -63,12 +63,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Valid]
     private ?string $adress = null;
 
-    #[ORM\Column(type: Types::INTEGER)]
+    #[ORM\Column(type: Types::STRING)]
     #[Assert\Count(
         max: 5,
         maxMessage: 'Ymax {{ limit }}',
     )]
-    private ?int $postcode = null;
+    private ?string $postcode = null;
 
 
     #[Assert\NotBlank]
