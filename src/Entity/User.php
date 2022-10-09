@@ -26,9 +26,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $email = null;
 
     #[ORM\Column]
-     /**
-     * @var array<string> $roles
-     */
     private array $roles = [];
 
     /**
@@ -266,5 +263,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
 }
