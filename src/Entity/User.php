@@ -25,7 +25,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Type(Address::class)]
     private ?string $email = null;
 
-    #[ORM\Column(type: 'json')]
+    #[ORM\Column]
+     /**
+     * @var array<string> $roles
+     */
     private array $roles = [];
 
     /**
