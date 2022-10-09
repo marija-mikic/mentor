@@ -114,9 +114,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return null;
     }
 
-    /**
-     * @see UserInterface
-     */
+    
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -125,7 +123,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return array_unique($roles);
     }
-
+   
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
