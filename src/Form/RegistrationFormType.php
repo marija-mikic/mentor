@@ -52,9 +52,6 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('username')
             ->add('adress')
-            ->add('house_number',NumberType::class,[
-                'mapped' => false
-            ])
             ->add('postcode',NumberType::class,[
                 'mapped' => false
             ])

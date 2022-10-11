@@ -76,11 +76,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $city = null;
 
     
-    #[ORM\Column(type: 'boolean')]
-    private $isVerified = false;
-
-    #[ORM\ManyToOne()]
-    private   $country = null;
+    #[ORM\ManyToOne]
+    private ?Country $country = null;
 
     public function getId(): ?int
     {
@@ -109,9 +106,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return (string) $this->email;
     }
 
-    
-
-    
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -120,7 +114,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return array_unique($roles);
     }
-   
+     /**
+     * @param array<string> $roles
+     * @return $this
+     */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
@@ -237,18 +234,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCountry(?country $country): self
     {
         $this->country = $country;
-
-        return $this;
-    }
-
-    public function getHouseNumber(): ?int
-    {
-        return $this->house_number;
-    }
-
-    public function setHouseNumber(int $house_number): self
-    {
-        $this->house_number = $house_number;
 
         return $this;
     }
