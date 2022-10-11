@@ -106,6 +106,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return (string) $this->email;
     }
 
+    /**
+     * @see UserInterface
+     */
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -226,12 +229,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getCountry(): ?country
+    public function getCountry(): ?Country
     {
         return $this->country;
     }
 
-    public function setCountry(?country $country): self
+    public function setCountry(?Country $country): self
     {
         $this->country = $country;
 
