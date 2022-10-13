@@ -22,9 +22,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $email = null;
 
     
-     /**
-     * @var array<string> $roles
+    /**
+     * @var String[] $roles
      */
+    #[ORM\Column]
     private array $roles = [];
 
     /**
@@ -117,11 +118,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return array_unique($roles);
     }
-     /**
-     * @param array<string> $roles
-     * @return $this
+
+    /**
+     * @param string[] $roles
      */
-    public function setRoles(string $roles): self
+    public function setRoles(array $roles): self
     {
         $this->roles = $roles;
 
