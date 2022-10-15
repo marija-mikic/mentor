@@ -25,6 +25,8 @@
 
                 <div class="col-12">
                     <button class="btn btn-lg btn-primary float-end" type="submit">
+                    <input type="hidden" name="_csrf_token"
+                    value="{{ csrf_token('authenticate') }}">
                         Sign in
                     </button>
                 </div>

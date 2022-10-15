@@ -52,9 +52,7 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('username')
             ->add('adress')
-            ->add('postcode',NumberType::class,[
-                'mapped' => false
-            ])
+            ->add('postcode')
             ->add('city',TextType::class, [                 
                 'constraints' => [
                     new NotBlank([
