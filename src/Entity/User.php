@@ -3,24 +3,25 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-
+use Symfony\Component\Validator\Constraints as Assert;
+ 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column()]
+    #[ORM\Column]
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
+    
     /**
      * @var String[] $roles
      */
@@ -33,8 +34,51 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\Column(type: 'boolean')]
-    private bool $isVerified = false;
+    #[ORM\Column(type: Types::TEXT)]
+    #[Assert\Length(
+        min: 5,
+        max: 30,
+        minMessage: 'Your first name must be at least {{ limit }} characters long',
+        maxMessage: 'Your first name cannot be longer than {{ limit }} characters',
+    )]
+    private ?string $name = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    #[Assert\Length(
+        min: 5,
+        max: 30,
+        minMessage: 'Your first name must be at least {{ limit }} characters long',
+        maxMessage: 'Your first name cannot be longer than {{ limit }} characters',
+        )]
+    private ?string $surname = null;
+
+    #[ORM\Column]
+    #[Assert\Regex(
+        pattern: '/^[a-z]+$/i',
+        htmlPattern: '^[a-zA-Z]+$',
+        message: 'This {{ value }} is not valid.'
+    )]
+    private ?string $username = null;
+
+    #[ORM\Column(length: 255)]
+    #[Assert\Valid]
+    private ?string $adress = null;
+
+    #[ORM\Column(type: Types::STRING)]
+    #[Assert\Count(
+        max: 5,
+        maxMessage: 'Ymax {{ limit }}',
+    )]
+    private ?string $postcode = null;
+
+
+    #[Assert\NotBlank]
+    #[ORM\Column(length: 255)]
+    private ?string $city = null;
+
+    
+    #[ORM\ManyToOne]
+    private ?Country $country = null;
 
     public function getId(): ?int
     {
@@ -59,14 +103,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @see UserInterface
      */
     public function getUserIdentifier(): string
-    {
-        return (string) $this->email;
-    }
-
-    /**
-     * @deprecated since Symfony 5.3, use getUserIdentifier instead
-     */
-    public function getUsername(): string
     {
         return (string) $this->email;
     }
@@ -108,12 +144,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * Returning a salt is only needed, if you are not using a modern
-     * hashing algorithm (e.g. bcrypt or sodium) in your security.yaml.
-     *
-     * @see UserInterface
-     */
     public function getSalt(): ?string
     {
         return null;
@@ -122,21 +152,99 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see UserInterface
      */
-    public function eraseCredentials(): void
+    public function eraseCredentials():void
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
 
-    public function isVerified(): bool
+    public function getName(): ?string
     {
-        return $this->isVerified;
+        return $this->name;
     }
 
-    public function setIsVerified(bool $isVerified): self
+    public function setName(string $name): self
     {
-        $this->isVerified = $isVerified;
+        $this->name = $name;
 
         return $this;
     }
+
+    public function getSurname(): ?string
+    {
+        return $this-> surname;
+    }
+
+    public function setSurname(string $surname): self
+    {
+        $this-> surname = $surname;
+
+        return $this;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    public function getAdress(): ?string
+    {
+        return $this->adress;
+    }
+
+    public function setAdress(string $adress): self
+    {
+        $this->adress = $adress;
+
+        return $this;
+    }
+
+    public function getPostcode(): ?string
+    {
+        return $this->postcode;
+    }
+
+    public function setPostcode( string $postcode): self
+    {
+        $this->postcode = $postcode;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getCountry(): ?Country
+    {
+        return $this->country;
+    }
+
+    public function setCountry(?Country $country): self
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
 }
