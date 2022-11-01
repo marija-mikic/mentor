@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<title>USER'S</title>
+
+{% block body %}
+<h2>USER'S</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>KORISNIČKO IME</th>
+            <th>IME</th>
+            <th>PREZIME</th>
+        </tr>
+    </thead>
+<tbody>
+{% for user in users %} 
+        <tr>
+            <td>{{user.id}} </td>     
+            <td>{{user.username}} </td> 
+            <td>{{user.name}} </td>
+            <td>{{user.surname}} </td> 
+            <td><a class="btn" style="display: inline" href={path('user_edit', {id:user_id})}>EDIT</a></td> 
+        </tr>
+{% endfor %}
+</tbody>  
+{% endblock %}
