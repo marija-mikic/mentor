@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<title>Hello DashboardController!</title>
+<title>Hello Admin!</title>
 
 {% block body %}
 <style>
@@ -10,5 +10,8 @@
 
 <div class="example-wrapper">
     <h1>ADMIN! ✅</h1>
+</div>
+    <div>
+        <a class="btn btn-sm btn-primary" href="{{ path('app_user') }}">USER'S</a>
     </div>
 {% endblock %}
