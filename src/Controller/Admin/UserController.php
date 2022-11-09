@@ -24,7 +24,7 @@ class UserController extends AbstractController
         ]);
     }
      #[Route('/{id}/edit', name:'user_edit', methods:'GET')]
-    public function edit( Request $request, User $user, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager) 
+    public function edit( Request $request, User $user, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager) :Response
     {
             $form = $this->createForm(RegistrationFormType::class, $user);
             $form->handleRequest($request);
