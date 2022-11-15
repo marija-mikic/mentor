@@ -6,6 +6,8 @@ use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\Id;
+use PhpParser\Node\Stmt\If_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,32 +25,28 @@ class UserController extends AbstractController
             'users'=>$userRepository->findAll(),
         ]);
     }
+
+    
      #[Route('/{id}/edit', name:'user_edit', methods:'GET')]
-    public function edit( Request $request, User $user, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager) :Response
+    public function edit(User $user)
     {
-            $form = $this->createForm(RegistrationFormType::class, $user);
-            $form->handleRequest($request);
-
-            if ($form->isSubmitted() && $form->isValid()) {
-                // encode the plain password
-                $user->setPassword(
-                    $userPasswordHasher->hashPassword(
-                        $user,
-                        $form->get('plainPassword')->getData()
-                    )
-                );
-
-                $entityManager->persist($user);
-                $entityManager->flush();
-
-                return $this->redirectToRoute('app.user');
-            }
-            return $this->render('dashboard/user/edit.html.twig',[
-                'user' => $user,
-                'form' => $form->createView(),
-            ]);
-
+        if($_SERVER['REQUEST_METHOD']==='POST')
         
-
-    }
-}
+            if(isset($_GET['submit'])){
+                $user= new User();
+                $user->getId($_POST['id']);
+                $user->setName($_POST['name']);
+                $user->setSurname($_POST['surname']);
+                $user->setEmail('email');  
+                             
+                return $this->redirectToRoute('app_user');            
+            }                
+          
+            return $this->render('dashboard/user/edit.html.twig',[
+                'user'=>$user,   
+                           
+            ]); 
+           
+        }        
+    
+}  
