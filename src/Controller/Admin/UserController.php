@@ -18,12 +18,14 @@ class UserController extends AbstractController
     /**
      * user
      *
-     * @param  mixed $request
-     * @param  mixed $userRepository
-     * @param  mixed $entityManager
-     * @return Response
+     * @param  array $entityManager
      */
     private $entityManager;
+    /**
+     * user
+     *
+     * @param  array $userRepository
+     */
     private $userRepository;
 
     public function __construct(EntityManagerInterface $entityManager, UserRepository $userRepository)
