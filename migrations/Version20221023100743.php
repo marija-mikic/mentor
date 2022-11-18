@@ -25,7 +25,6 @@ final class Version20221023100743 extends AbstractMigration
         $this->addSql('ALTER TABLE `user` ADD CONSTRAINT FK_8D93D649F92F3E70 FOREIGN KEY (country_id) REFERENCES country (id)');
         $this->addSql("INSERT INTO country (name) VALUES ('austria'),('Belgija')");
         $this->addSql("INSERT INTO user (country_id, email, roles, password, name, surname, username, adress, postcode, city) VALUES ( '1', 'admin@gmail.com','[\"ROLE_ADMIN\"]','$2y$10$5RXvVxLsvFG20a9QCjgsY.5NUktrgdsdQFmzNSCedM.Ax.2whWt2a', 'admin', 'admin', 'admin' , 'admina', '31400','dj')"); 
-        $this->addSql("UPDATE user SET name:name, surname:surname, username:username, email:email WHERE id=:id");
     }
 
     public function down(Schema $schema): void

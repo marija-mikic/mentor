@@ -1,33 +1,19 @@
-<title>USER'S</title>
-
 {% block body %}
-<h2>EDIT USER'S</h2>
-<body>
-    <div class="card-body"
-        <form action="/user/edit" method="GET"
-        <input type="hidden" id="id" name="id" value={{user.id}}>
-                <div class="mb-3">
-                    <label>NAME</label>
-                    <input type="text" name="name" value={{user.name}} class="form-control">  
-                </div>
-                <div class="mb-3">
-                    <label>SURNAME</label>
-                    <input type="text" name="surname" value={{user.surname}} class="form-control">  
-                </div>
-                <div class="mb-3">
-                    <label>USERNAME</label>
-                    <input type="text" name="username" value={{user.username}} class="form-control">  
-                </div>
-                <div class="mb-3">
-                    <label>email</label>
-                    <input type="text" name="email" value={{user.email}} class="form-control">  
-                </div>
-                <div class="text-center mt-3">
-                     <button type="submit" name="submit" class="btn btn-success">
-                Edit user
-                    </button>
-                </div>
-         </form>
-    </div>
-</tbody>  
+<div class="w-4/5 m-auto pt-40">
+    <h1 class="text-6xl text-center pb-12">
+        EDIT USER
+    </h1>
+
+    {{ form_start(form) }}
+
+        {{ form_widget(form) }}
+        
+        <button    
+            type="submit"
+            class="uppercase mt-15 bg-blue-500 text-gray-100 text-lg font-extrabold py-4 px-8 rounded-3xl">
+            Submit Post
+        </button>
+
+    {{ form_end(form) }}
+</div>
 {% endblock %}
