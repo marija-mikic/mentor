@@ -15,6 +15,14 @@ use Symfony\Component\HttpFoundation\Request;
 
 class UserController extends AbstractController
 {
+    /**
+     * user
+     *
+     * @param  mixed $request
+     * @param  mixed $userRepository
+     * @param  mixed $entityManager
+     * @return Response
+     */
     private $entityManager;
     private $userRepository;
 
