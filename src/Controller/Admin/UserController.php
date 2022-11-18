@@ -38,7 +38,7 @@ class UserController extends AbstractController
 
     #[IsGranted('ROLE_ADMIN')]
     #[Route('/{id}/edit', name:'user_edit')]
-    public function edit($id, Request $request):Response
+    public function edit(int $id, Request $request):Response
     {           
             
     $user= $this->userRepository->find($id);
