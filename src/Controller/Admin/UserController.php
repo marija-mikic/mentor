@@ -16,16 +16,14 @@ use Symfony\Component\HttpFoundation\Request;
 class UserController extends AbstractController
 {
     /**
-     * user
-     *
-     * @param  array $entityManager
+     * @var EntityManagerInterface
+     * 
      */
-    private $entityManager;
+    private $entityManager;  
     /**
-     * user
-     *
-     * @param  array $userRepository
-     */
+     * @var UserRepository
+     * 
+     */  
     private $userRepository;
 
     public function __construct(EntityManagerInterface $entityManager, UserRepository $userRepository)
@@ -37,7 +35,7 @@ class UserController extends AbstractController
 
     #[IsGranted('ROLE_ADMIN')]
     #[Route('/user', name: 'app_user', methods:'GET')]
-    public function index(): Response
+    public function index():Response
     {
         $users = $this->userRepository->findAll();
 
