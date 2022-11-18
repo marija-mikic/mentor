@@ -15,8 +15,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 class UserController extends AbstractController
 {
-    private array $entityManager;
-    private array $userRepository;
+    private $entityManager;
+    private $userRepository;
 
     public function __construct(EntityManagerInterface $entityManager, UserRepository $userRepository)
     {
