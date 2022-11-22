@@ -1,7 +1,7 @@
 <title>USER'S</title>
 
 {% block body %}
-<h2>USER'S</h2>
+ <h2>USER'S</h2>
 <table class="table">
     <thead>
         <tr>
@@ -18,7 +18,7 @@
             <td>{{user.username}} </td> 
             <td>{{user.name}} </td>
             <td>{{user.surname}} </td> 
-            <td><a class="btn" style="display: inline" href={path('user_edit', {id:user_id})}>EDIT</a></td> 
+            <td><a href="{{ path ('user_edit', {id: user.id}) }}">EDIT</a></td> 
         </tr>
 {% endfor %}
 </tbody>  

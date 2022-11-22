@@ -10,7 +10,7 @@
 </div>
  {% if app.user %}
     <div>
-        Dobrodošao {{ app.user.username }} <a class="btn btn-sm btn-danger" href="{{ path('app_logout') }}">ODJAVA</a>      
+        Dobrodošao {{app.user.username }} <a class="btn btn-sm btn-danger" href="{{ path('app_logout') }}">ODJAVA</a>      
     </div>
 {% else %}
     <div>
