@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class MaterijalController extends AbstractController
 {
     /**
-     * @var EntityManagerInterface $entitityManager
+     * @var EntityManagerInterface
      * 
      */
     private $entityManager;
