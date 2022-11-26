@@ -1,0 +1,28 @@
+<title>BOOK FORMAT</title>
+
+{% block body %}
+ <h2>FORMAT</h2>
+ <div>
+        <a class="btn btn-sm btn-primary" href="{{ path('app_newformat') }}">DODAJ NOVI FORMAT</a>
+    </div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>NAZIV</th>
+            <th>ŠIRINA</th>
+            <th>VISINA</th>
+        </tr>
+    </thead>
+<tbody>
+{% for format in formats %} 
+        <tr>
+            <td>{{format.id}} </td>   
+            <td>{{format.name}} </td>  
+            <td>{{format.height}} </td> 
+            <td>{{format.widht}} </td>
+        </tr>
+{% endfor %}
+</tbody>  
+{% endblock %}
