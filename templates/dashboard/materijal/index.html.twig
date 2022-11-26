@@ -1,0 +1,24 @@
+<title>BOOK MATERIJAL</title>
+
+{% block body %}
+ <h2>MATERIJAL</h2>
+ <div>
+        <a class="btn btn-sm btn-primary" href="{{ path('app_newmaterial') }}">DODAJ NOVI MATERIJAL</a>
+    </div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>NAZIV</th>
+        </tr>
+    </thead>
+<tbody>
+{% for materijal in materijals %} 
+        <tr>
+            <td>{{materijal.id}} </td>   
+            <td>{{materijal.name}} </td>  
+        </tr>
+{% endfor %}
+</tbody>  
+{% endblock %}
