@@ -1,0 +1,28 @@
+<title>UNOS CIJENE</title>
+
+{% block body %}
+ <h2>CIJENE MATERIJALA SA FORMATIMA</h2>
+ <div>
+        <a class="btn btn-sm btn-primary" href="{{ path('app_newfm') }}">DODAJ NOVU CIJENU</a>
+    </div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>format</th>
+            <th>materijal</th>
+            <th>cijena</th>
+        </tr>
+    </thead>
+<tbody>
+{% for fm in fms %} 
+        <tr>
+            <td>{{fm.id}} </td>  
+            <td>{{fm.format}} </td>
+             <td>{{fm.materijal}} </td>
+              <td>{{fm.price}} </td> 
+        </tr>
+{% endfor %}
+</tbody>  
+{% endblock %}
