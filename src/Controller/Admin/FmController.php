@@ -1,11 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Admin;
 
 use App\Entity\FM;
 use App\Form\FmFormType;
 use App\Repository\FmRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,7 +27,7 @@ class FmController extends AbstractController
     }
 
 
-
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/fm', name: 'app_fm')]
     public function index(): Response
     {
@@ -34,6 +37,7 @@ class FmController extends AbstractController
             'fms' => $fms,
         ]);
     }
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('fm/new', name: 'app_newfm')]
     public function new(Request $request): Response
     {
