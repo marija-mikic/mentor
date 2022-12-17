@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<title>BOOK</title>
+
+{% block body %}
+ <h2>BOOK</h2>
+ <div>
+        <a class="btn btn-sm btn-primary" href="{{ path('app_newbook') }}">DODAJ NOVU KNJIGU</a>
+    </div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>NAZIV</th>
+            <th>AUTOR</th>
+            <th>OPIS KNJIGE</th>
+            <th>BROJ STRANICA</th>
+            <th>CIJENA</th>
+            <th>IZGLED</th>
+        </tr>
+    </thead>
+<tbody>
+{% for book in books %} 
+        <tr>
+            <td>{{book.id}} </td>   
+            <td>{{book.name}} </td>  
+            <td>{{book.author}} </td> 
+            <td>{{book.about}} </td>
+            <td>{{book.nrpage}} </td>
+            <td>{{book.bookPrice}} </td>
+            <td>{{book.FM}} </td>
+        </tr>
+{% endfor %}
+</tbody>  
+{% endblock %}
