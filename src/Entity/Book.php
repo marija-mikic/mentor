@@ -20,7 +20,7 @@ class Book
     #[ORM\Column(type: Types::TEXT)]
     private ?string $author = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: '0')]
+    #[ORM\Column(type: Types::DECIMAL)]
     private ?string $bookPrice = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -31,6 +31,9 @@ class Book
 
     #[ORM\ManyToOne(inversedBy: 'books')]
     private ?FM $FM = null;
+
+
+
 
     public function getId(): ?int
     {
@@ -109,7 +112,7 @@ class Book
     /**
      * Get the value of nrpage
      */
-    public function getNrpage()
+    public function getNrpage(): ?int
     {
         return $this->nrpage;
     }
@@ -119,15 +122,10 @@ class Book
      *
      * @return  self
      */
-    public function setNrpage($nrpage)
+    public function setNrpage(int $nrpage): self
     {
         $this->nrpage = $nrpage;
 
         return $this;
-    }
-
-    public function calculate($nrpage, $price)
-    {
-        return $nrpage * $price;
     }
 }
